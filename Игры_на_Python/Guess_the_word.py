@@ -20,12 +20,15 @@ while playGame:
 
     # Первое действие, приветсвие игрока.
     digit = random.randint(lowDigit, highDigit)
+    score = startScore
     print('----------------------')
     print('Компьютер загадал число, попробуй отгадать!')
-    print(f'Загаданое число {digit}')    
+    print(f'Загаданое число {digit}')
+    while not win and score > 0:
+        print('-' * 30)
+        print(f'Заработано очков: {score}')
+        print(f'Рекорд: {maxScore}')
     
-    # Внутренний цикл
-    while not win:
         x = '' # Начальное значение, до введеного пользователем.
 
         # Проверка введенно значения, является ли оно числом
@@ -38,9 +41,8 @@ while playGame:
         
         #  Проверка на выйгрыш
         if x == digit:
-            print('Победа! Поздравляем!')
             win = True
-
+        else:
             # Функционал подсказки для пользователя    
             length = abs(x - digit)
             if length < 3:
@@ -52,12 +54,49 @@ while playGame:
             elif length < 20:
                 print('Холодно')
             else:
-                print('Вы далеки от ответа')    
+                print('Стужа')   
 
+            # Функционал подсчета очков
+            if countInput == 7:
+                score -= 10
+                if  digit % 2 == 0:
+                    print('Число четное')
+                else:
+                    print('Число нечетное')
+            elif countInput == 6:
+                score -= 8
+                if digit % 3 == 0:
+                    print('Число делиться на 3')
+            elif countInput == 5:
+                score -= 4
+                if digit % 4 == 0:
+                    print('Число делится на 4')
+                else:
+                    print('Число не делится на 4')
+            elif 2 < countInput < 5:
+                score -= 2
+                if x > digit:
+                    print('Загаданое число МЕНЬШЕ вашего')
+                else:
+                    print('Загаданное число БОЛЬШЕ вашего')
+            score -= 5
+        countInput += 1
+    
+    print('*' * 40)
+    if x == digit:
+        print('Победа! Поздравляем!')
+        win = True
+    else:
+        print('У Вас закончились очки. Вы проиграли :(')
+    
+    # Предложение закончить или продолжить играть           
     if input('Enter - сыграем еще, 0 - выход ') == '0':
         playGame = False
     else:
         win = False
+    
+    if score > maxScore:
+        maxScore = score
 
 
 
