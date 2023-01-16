@@ -40,9 +40,24 @@ while playGame:
         if x == digit:
             print('Победа! Поздравляем!')
             win = True
-    
+
+            # Функционал подсказки для пользователя    
+            length = abs(x - digit)
+            if length < 3:
+                print('Очень горячо!')
+            elif length < 5:
+                print('Горячо!')
+            elif length < 10:
+                print('Тепло')
+            elif length < 20:
+                print('Холодно')
+            else:
+                print('Вы далеки от ответа')    
+
     if input('Enter - сыграем еще, 0 - выход ') == '0':
         playGame = False
     else:
         win = False
+
+
 
