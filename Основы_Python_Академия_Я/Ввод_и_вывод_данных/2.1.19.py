@@ -1,4 +1,5 @@
-product, weight, price, money = input(), int(input()), int(input()), int(input())
+product, weight, price, money = input(), int(
+    input()), int(input()), int(input())
 print('=' * 16 + 'Чек' + '=' * 16)
 print('Товар:' + ' ' * (29 - len(product)) + product)
 p = f'{price}кг * {weight}руб/кг'
